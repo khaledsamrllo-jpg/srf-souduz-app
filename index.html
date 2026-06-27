@@ -196,9 +196,9 @@
             font-size: 13px;
             color: var(--text-muted);
             margin-bottom: 8px;
+            font-weight: bold;
         }
 
-        /* لضمان الأرقام الغربية دائماً في حقول الإدخال */
         input, textarea, select {
             width: 100%;
             background-color: var(--bg-dark);
@@ -215,6 +215,45 @@
         input:focus, textarea:focus, select:focus {
             border-color: var(--neon-blue);
             outline: none;
+        }
+
+        /* حاوية الأرقام المفتوحة للكتابة والتحكم بالأسهم معاً */
+        .custom-number-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-number-wrapper input {
+            padding-right: 45px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .custom-spin-buttons {
+            position: absolute;
+            right: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .spin-btn {
+            background: #2d3748;
+            border: 1px solid #4a5568;
+            color: white;
+            padding: 2px 8px;
+            font-size: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .spin-btn:hover {
+            background: var(--neon-blue);
+            color: black;
         }
 
         .action-btn {
@@ -248,7 +287,29 @@
             border: 1px solid #2d3748;
         }
 
-        /* تنسيق جدول التقرير الجديد ليكون أكثر تنظيم وتناسق */
+        .optional-header {
+            background-color: #242933;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            border: 1px dashed #4a5568;
+        }
+
+        .optional-fields {
+            display: none;
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #2d3748;
+        }
+
         .report-header-box {
             background: rgba(0, 210, 255, 0.05);
             border: 1px solid rgba(0, 210, 255, 0.2);
@@ -295,11 +356,6 @@
             background-color: #1e222b;
             color: var(--neon-blue);
             font-weight: 600;
-            border-top: none;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
         }
 
         td {
@@ -330,12 +386,6 @@
             padding: 6px 10px;
             border-radius: 6px;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .delete-btn:hover {
-            background-color: var(--neon-red);
-            color: white;
         }
 
         .print-btn {
@@ -346,10 +396,8 @@
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.2);
         }
 
-        /* تنسيق أسفل التطبيق (Footer) مع الحقوق والرابط */
         footer {
             text-align: center;
             padding: 20px 10px;
@@ -369,11 +417,6 @@
             font-weight: bold;
         }
 
-        footer a:hover {
-            color: var(--neon-green);
-            text-decoration: underline;
-        }
-
         @media print {
             body { background: white; color: black; }
             .no-print { display: none !important; }
@@ -381,9 +424,7 @@
             footer { display: none !important; }
             #reportArea, #reportArea * { visibility: visible; }
             #reportArea { position: absolute; left: 0; top: 0; width: 100%; color: black; }
-            .report-header-box { border: 1px solid #000; background: #f9f9f9 !important; color: black; }
-            .report-header-box p { color: black; }
-            .report-header-box p strong { color: black; }
+            .report-header-box { border: 1px solid #000; background: #f9f9f9 !important; }
             table { min-width: 100%; }
             th { color: black !important; border: 1px solid #000; background-color: #eee !important; }
             td { color: black !important; border: 1px solid #000; background: none; }
@@ -399,7 +440,7 @@
         <i class="fa-solid fa-network-wired"></i>
     </div>
     <div class="splash-title">SRF APP SOUDUZ</div>
-    <div class="splash-subtitle">Algérie Telecom Automated Field System</div>
+    <div class="splash-subtitle">Algérie Telecom Field System</div>
     <button class="btn-enter" onclick="enterApp()">ENTER / دخول</button>
 </div>
 
@@ -451,66 +492,85 @@
                 </div>
             </div>
             <div class="form-group">
-                <label id="lblChantierNotes">Notes Générales du Projet (ملاحظات جغرافية أو معوقات) :</label>
+                <label id="lblChantierNotes">Notes Générales du Projet (ملاحظات جغرافية) :</label>
                 <textarea id="projectNotesInput" rows="3" placeholder="Ex: Emplacement à côté de l'APC..."></textarea>
             </div>
             <button class="action-btn" style="background: linear-gradient(90deg, #a855f7 0%, #6b21a8 100%);" onclick="saveProjectConfig()">💾 <span id="btnSaveConfig">Sauvegarder Configuration</span></button>
         </div>
     </div>
 
-    <!-- ================= أيقونة 2: العمل اليومي واللحام الذكي (الحاسبة المدمجة تلقائياً) ================= -->
+    <!-- ================= أيقونة 2: واجهة العمل الميداني المفتوحة للكتابة والأسهم معاً ================= -->
     <div id="tabDaily" class="tab-content">
         <div class="card">
             <h2><i class="fa-solid fa-bolt" style="color: var(--neon-green);"></i> <span id="hDaily">Production Journalière</span></h2>
             
             <div class="form-row">
                 <div class="form-group">
-                    <label id="lblPbo">PBO / العلبة :</label>
-                    <input type="text" id="pboInput" placeholder="Ex: PBO-12">
+                    <label id="lblLine">LINE :</label>
+                    <input type="text" id="pboInput" placeholder="Ex: A">
                 </div>
+                <!-- حقل T: مفتوح للكتابة اليدوية + أسهم التحكم الجانبية -->
                 <div class="form-group">
-                    <label id="lblBatiment">Bâtiment / رقم البناية :</label>
-                    <input type="text" id="batimentInput" placeholder="Ex: Bloc A / N°44">
+                    <label id="lblToro">T :</label>
+                    <div class="custom-number-wrapper">
+                        <input type="text" id="toroInput" value="1" oninput="cleanAndFormatInput(this)" style="background-color: var(--bg-dark); color: var(--neon-orange); direction: ltr;">
+                        <div class="custom-spin-buttons">
+                            <button class="spin-btn" onclick="spinToro(1)"><i class="fa-solid fa-chevron-up"></i></button>
+                            <button class="spin-btn" onclick="spinToro(-1)"><i class="fa-solid fa-chevron-down"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
-                    <label id="lblBrin">Brin N° (أدخل رقم برا الميداني) :</label>
-                    <input type="number" id="brinInput" placeholder="Ex: 14" oninput="autoCalculateDailyColors()">
+                    <label id="lblBatiment">رقم بناية :</label>
+                    <input type="text" id="batimentInput" placeholder="Ex: 120...">
                 </div>
+                <!-- حقل BR: مفتوح للكتابة اليدوية + أسهم التحكم الجانبية مع تحديث الألوان التلقائي -->
                 <div class="form-group">
-                    <label id="lblToro">Toro N° (يُحسب تلقائياً تورو) :</label>
-                    <!-- تم تعيين نوع الحقل وتنسيقه لضمان عرض الأرقام بشكل قياسي غربي -->
-                    <input type="text" id="toroInput" placeholder="Calculé" readonly style="background-color: rgba(0,0,0,0.3); color: var(--neon-green); font-weight: bold; direction: ltr;">
+                    <label id="lblBrin">رقم BR :</label>
+                    <div class="custom-number-wrapper">
+                        <input type="text" id="brinInput" value="1" oninput="cleanAndFormatInput(this); autoCalculateDailyColors();" style="background-color: var(--bg-dark); color: var(--neon-green); direction: ltr;">
+                        <div class="custom-spin-buttons">
+                            <button class="spin-btn" onclick="spinBrin(1)"><i class="fa-solid fa-chevron-up"></i></button>
+                            <button class="spin-btn" onclick="spinBrin(-1)"><i class="fa-solid fa-chevron-down"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- المعاينة اللحظية للألوان الجارية بجانب التقني دون تنقل -->
-            <div class="live-color-container" id="liveColorBox" style="display: none;">
+            <!-- المعاينة التلقائية للألوان الجارية بجانب الكابل -->
+            <div class="live-color-container" id="liveColorBox" style="display: flex;">
                 <div id="liveToroTile" class="live-tile">Toro</div>
                 <div id="liveBrinTile" class="live-tile">Brin</div>
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label id="lblOtdr">Test OTDR (dB) :</label>
-                    <input type="text" id="otdrInput" placeholder="Ex: 0.02 dB">
-                </div>
-                <div class="form-group">
-                    <label id="lblPower">Power Meter (dBm) :</label>
-                    <input type="text" id="powerInput" placeholder="Ex: -19.2 dBm">
-                </div>
+            <div class="form-group">
+                <label id="lblNotes">ملاحظات :</label>
+                <textarea id="notesInput" rows="2" placeholder="اكتب ملاحظات اللحام هنا..."></textarea>
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label id="lblManchon">Manchon (المونشو المستخدم) :</label>
-                    <input type="text" id="manchonInput" placeholder="Ex: Dome Sleeve 04">
+            <!-- القياسات الفنية الاختيارية للأجهزة -->
+            <div class="optional-header" onclick="toggleOptionalFields()">
+                <span><i class="fa-solid fa-gauge-high"></i> <span id="txtOptionalTitle">Mesures Appareils (OTDR / Power) - Optionnel</span></span>
+                <i class="fa-solid fa-chevron-down" id="optionalChevron"></i>
+            </div>
+            
+            <div class="optional-fields" id="optionalFieldsSection">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Test OTDR (Loss dB) :</label>
+                        <input type="text" id="otdrInput" placeholder="Ex: 0.02 dB">
+                    </div>
+                    <div class="form-group">
+                        <label>Power Meter (dBm) :</label>
+                        <input type="text" id="powerInput" placeholder="Ex: -19.2 dBm">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label id="lblNotes">Observations (الملاحظات) :</label>
-                    <input type="text" id="notesInput" placeholder="Ex: Soudure OK">
+                    <label id="lblManchon">Manchon / Sleeve :</label>
+                    <input type="text" id="manchonInput" placeholder="Ex: Dome 04">
                 </div>
             </div>
 
@@ -518,7 +578,7 @@
         </div>
     </div>
 
-    <!-- ================= أيقونة 3: التقرير النهائي الشامل والطباعة المتناسقة ================= -->
+    <!-- ================= أيقونة 3: التقرير النهائي الشامل والمنظم ================= -->
     <div id="tabReportTab" class="tab-content">
         <div class="card" id="reportArea">
             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -526,7 +586,6 @@
                 <button class="print-btn no-print" onclick="triggerPrint()"><i class="fa-solid fa-print"></i> PDF / Imprimer</button>
             </div>
             
-            <!-- لوحة الهيدر المنظمة والمنسقة للتقرير النهائي -->
             <div class="report-header-box">
                 <p><strong id="repLblEntreprise">Entreprise :</strong> <span id="repEntrepriseName">-</span></p>
                 <p><strong id="lblRepZone">Zone :</strong> <span id="repZoneName">-</span></p>
@@ -534,15 +593,14 @@
                 <p><strong>Client :</strong> Algérie Telecom (اتصالات الجزائر)</p>
             </div>
 
-            <!-- جدول متجاوب ومتناسق بالكامل -->
             <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
-                            <th>PBO</th>
+                            <th>LINE</th>
+                            <th id="thToro">T</th>
                             <th id="thBatiment">Bâtiment</th>
-                            <th id="thToro">Toro</th>
-                            <th id="thBrin">Brin</th>
+                            <th id="thBrin">BR (Brin)</th>
                             <th>OTDR</th>
                             <th>Power Meter</th>
                             <th id="thManchon">Manchon</th>
@@ -551,7 +609,7 @@
                         </tr>
                     </thead>
                     <tbody id="tableRows">
-                        <!-- خطوط الإنتاج تضاف هنا برمجياً -->
+                        <!-- الأسطر المضافة برمجياً -->
                     </tbody>
                 </table>
             </div>
@@ -560,7 +618,7 @@
         </div>
     </div>
 
-    <!-- أسفل التطبيق الاحترافي (Footer) للحقوق والرابط الفوري للفيسبوك -->
+    <!-- أسفل التطبيق (Footer) للحقوق والرابط الفوري -->
     <footer class="no-print">
         <div>كل الحقوق محفوظة © 2026 | المطور <strong>khaledsaadeddine</strong></div>
         <a href="https://www.facebook.com/share/1Kym9fs88B/" target="_blank">
@@ -603,28 +661,28 @@
     const dictionary = {
         fr: {
             navProject: "Chantier / الميدان", navDaily: "Travail / العمل اليومي", navReport: "Rapport / التقرير",
-            hChantier: "Données Géographiques & Configuration", hDaily: "Production & Code Couleur Automatique",
+            hChantier: "Données Géographiques & Configuration", hDaily: "Saisie Terrain Suivant Plan",
             lblEntreprise: "Nom de l'Entreprise (اسم المقاولة) :", lblZone: "Zone d'influence :", lblSro: "SRO (خزانة التوزيع) :",
             lblChantierNotes: "Notes Générales du Projet :", btnSaveConfig: "Sauvegarder Configuration",
-            lblPbo: "PBO / العلبة :", lblBatiment: "Bâtiment / رقم البناية :", lblToro: "Toro N° (يُحسب تلقائياً) :", lblBrin: "Brin N° (برا) :",
-            lblOtdr: "Test OTDR (dB) :", lblPower: "Power Meter (dBm) :", lblManchon: "Manchon :",
-            lblNotes: "Observations :", btnSaveDaily: "Enregistrer & Passer au Suivant", 
+            lblLine: "LINE :", lblBatiment: "Bâtiment / رقم بناية :", lblToro: "T :", lblBrin: "رقم BR :",
+            lblNotes: "ملاحظات :", btnSaveDaily: "Enregistrer & Passer au Suivant", 
             titleReport: "Rapport Final - Zone d'influence", repLblEntreprise: "Entreprise :", lblRepZone: "Zone :",
-            thBatiment: "Bâtiment", thToro: "Toro", thBrin: "Brin", thManchon: "Manchon", thNotes: "Observations", thAction: "Action",
-            btnClear: "Réinitialiser Tout", alertFields: "Veuillez renseigner le PBO et le numéro de Brin !",
-            toroNum: "Toro N°", brinNum: "Brin N°"
+            thBatiment: "Bâtiment", thToro: "T", thBrin: "BR", thManchon: "Manchon", thNotes: "Observations", thAction: "Action",
+            btnClear: "Réinitialiser Tout", alertFields: "Veuillez renseigner le LINE !",
+            toroNum: "T N°", brinNum: "BR N°", txtOptionalTitle: "Mesures Appareils (OTDR / Power) - Optionnel",
+            lblManchon: "Manchon / Sleeve :"
         },
         ar: {
             navProject: "بيانات الميدان", navDaily: "العمل اليومي", navReport: "التقرير النهائي",
-            hChantier: "بيانات الموقع الاستراتيجية والتكوين العام", hDaily: "إنتاج اللحام وكود الألوان التلقائي المباشر",
+            hChantier: "بيانات الموقع الاستراتيجية والتكوين العام", hDaily: "واجهة العمل الميداني واللحام اليومي المباشر",
             lblEntreprise: "اسم الشركة / المقاولة المنفذة :", lblZone: "منطقة التأثير (Zone) :", lblSro: "خزانة التوزيع (SRO) :",
             lblChantierNotes: "ملاحظات جغرافية عامة حول منطقة المشروع :", btnSaveConfig: "تأمين وحفظ تكوين الميدان",
-            lblPbo: "علبة الـ PBO المتفرعة :", lblBatiment: "رقم البناية / التجمع السكني :", lblToro: "تورو رقم (يُحسب تلقائياً) :", lblBrin: "برا رقم (Brin) :",
-            lblOtdr: "قياس الـ OTDR الفقد الفني (dB) :", lblPower: "إشارة الباور ماتر المقاسة (dBm) :", lblManchon: "علبة الحماية أو المونشو :",
-            lblNotes: "ملاحظة فنية مخصصة لهذا الخط :", btnSaveDaily: "حفظ وتسجيل والانتقال للبرا التالي فوراً", titleReport: "التقرير النهائي الهندسي لـ Zone d'influence",
-            repLblEntreprise: "المقاول المنفذ :", lblRepZone: "المنطقة :", thBatiment: "البناية", thToro: "تورو", thBrin: "برا", thManchon: "المونشو",
-            thNotes: "الملاحظات", thAction: "إجراء", btnClear: "مسح وتصفير كافة الملفات والبيانات", alertFields: "يجب إدخال علبة الـ PBO ورقم البرا لحساب الخصائص تلقائياً!",
-            toroNum: "تورو رقم", brinNum: "برا رقم"
+            lblLine: "الخط LINE :", lblBatiment: "رقم البناية :", lblToro: "تورو T :", lblBrin: "رقم البرا BR :",
+            lblNotes: "الملاحظات الفنية :", btnSaveDaily: "تسجيل خط اللحام والانتقال للتالي", titleReport: "التقرير النهائي الهندسي لـ Zone d'influence",
+            repLblEntreprise: "المقاول المنفذ :", lblRepZone: "المنطقة :", thBatiment: "البناية", thToro: "T", thBrin: "BR", thManchon: "المونشو",
+            thNotes: "الملاحظات", thAction: "إجراء", btnClear: "مسح وتصفير كافة البيانات", alertFields: "يجب إدخال خانة LINE لحفظ العمل اليومي!",
+            toroNum: "تورو رقم", brinNum: "برا رقم", txtOptionalTitle: "قياسات الأجهزة الفنية (OTDR / باور ماتر) - اختيارية",
+            lblManchon: "علبة الحماية أو المونشو :"
         }
     };
 
@@ -636,6 +694,7 @@
         setTimeout(() => {
             document.getElementById('splashScreen').style.display = 'none';
             document.getElementById('appMain').style.display = 'block';
+            autoCalculateDailyColors();
             loadStoredReport();
         }, 500);
     }
@@ -657,6 +716,50 @@
         }
     }
 
+    function toggleOptionalFields() {
+        playBeep(500, 0.05);
+        const section = document.getElementById('optionalFieldsSection');
+        const chevron = document.getElementById('optionalChevron');
+        if(section.style.display === 'block') {
+            section.style.display = 'none';
+            chevron.className = "fa-solid fa-chevron-down";
+        } else {
+            section.style.display = 'block';
+            chevron.className = "fa-solid fa-chevron-up";
+        }
+    }
+
+    // دالة المعالجة والتنظيف الفوري للمدخلات اليدوية لمنع كتابة الأرقام الهندية أو الأحرف
+    function cleanAndFormatInput(inputElement) {
+        // تحويل الأرقام الهندية/الشرقية يدوياً إلى أرقام غربية قياسية في نفس اللحظة
+        let val = inputElement.value;
+        val = val.replace(/[٠-٩]/g, d => d.charCodeAt(0) - 1632);
+        // إزالة أي رموز أو أحرف غير رقمية
+        val = val.replace(/[^0-9]/g, '');
+        inputElement.value = val;
+    }
+
+    // دوال التحكم بالأسهم البرمجية
+    function spinToro(val) {
+        playBeep(500, 0.03);
+        const input = document.getElementById('toroInput');
+        let current = parseInt(input.value) || 1;
+        current += val;
+        if(current < 1) current = 1;
+        input.value = String(current);
+    }
+
+    function spinBrin(val) {
+        playBeep(500, 0.03);
+        const input = document.getElementById('brinInput');
+        let current = parseInt(input.value) || 1;
+        current += val;
+        if(current < 1) current = 1;
+        if(current > 144) current = 144;
+        input.value = String(current);
+        autoCalculateDailyColors();
+    }
+
     function changeLanguage() {
         playBeep(500, 0.05);
         currentLang = document.getElementById('langSelect').value;
@@ -676,15 +779,14 @@
         document.getElementById('lblChantierNotes').innerText = d.lblChantierNotes;
         document.getElementById('btnSaveConfig').innerText = d.btnSaveConfig;
 
-        document.getElementById('lblPbo').innerText = d.lblPbo;
+        document.getElementById('lblLine').innerText = d.lblLine;
         document.getElementById('lblBatiment').innerText = d.lblBatiment;
         document.getElementById('lblToro').innerText = d.lblToro;
         document.getElementById('lblBrin').innerText = d.lblBrin;
-        document.getElementById('lblOtdr').innerText = d.lblOtdr;
-        document.getElementById('lblPower').innerText = d.lblPower;
-        document.getElementById('lblManchon').innerText = d.lblManchon;
         document.getElementById('lblNotes').innerText = d.lblNotes;
         document.getElementById('btnSaveDaily').innerText = d.btnSaveDaily;
+        document.getElementById('txtOptionalTitle').innerText = d.txtOptionalTitle;
+        document.getElementById('lblManchon').innerText = d.lblManchon;
         
         document.getElementById('titleReport').innerText = d.titleReport;
         document.getElementById('repLblEntreprise').innerText = d.repLblEntreprise;
@@ -702,21 +804,12 @@
         loadStoredReport();
     }
 
-    // دالة المعالجة التلقائية الإجبارية للأرقام الغربية اللاتينية
     function autoCalculateDailyColors() {
-        const rawBrin = document.getElementById('brinInput').value;
-        const num = parseInt(rawBrin);
-        const toroInput = document.getElementById('toroInput');
+        const num = parseInt(document.getElementById('brinInput').value) || 1;
         const liveColorBox = document.getElementById('liveColorBox');
         const liveToroTile = document.getElementById('liveToroTile');
         const liveBrinTile = document.getElementById('liveBrinTile');
         const d = dictionary[currentLang] || dictionary['fr'];
-
-        if (!num || num < 1) {
-            toroInput.value = '';
-            liveColorBox.style.display = 'none';
-            return;
-        }
 
         const toroIndex = Math.ceil(num / 12);
         const brinIndex = (num - 1) % 12;
@@ -724,13 +817,10 @@
         const toroColor = algerieTelecomColors[(toroIndex - 1) % 12];
         const brinColor = algerieTelecomColors[brinIndex];
 
-        // ميكانيزم حاسم: قسر السلسلة النصية للأرقام الغربية القياسية لمنع أي تحويل محلي للهاتف
-        toroInput.value = String(toroIndex).replace(/[٠-٩]/g, d => d.charCodeAt(0) - 1632);
-
         liveColorBox.style.display = 'flex';
 
         liveToroTile.style.backgroundColor = toroColor.hex;
-        liveToroTile.innerText = `${d.toroNum} ${toroInput.value}: ${currentLang === 'ar' ? toroColor.ar : toroColor.fr}`;
+        liveToroTile.innerText = `${d.toroNum} ${toroIndex}: ${currentLang === 'ar' ? toroColor.ar : toroColor.fr}`;
         liveToroTile.style.color = toroColor.darkText ? '#000' : '#fff';
 
         liveBrinTile.style.backgroundColor = brinColor.hex;
@@ -768,14 +858,15 @@
         playBeep(700, 0.08);
         const pbo = document.getElementById('pboInput').value || "-";
         const batiment = document.getElementById('batimentInput').value || "-";
-        const toro = document.getElementById('toroInput').value || "-";
-        const brin = document.getElementById('brinInput').value || "-";
+        const toro = document.getElementById('toroInput').value || "1";
+        const brin = document.getElementById('brinInput').value || "1";
+        
         const otdr = document.getElementById('otdrInput').value || "-";
         const power = document.getElementById('powerInput').value || "-";
         const manchon = document.getElementById('manchonInput').value || "-";
         const notes = document.getElementById('notesInput').value || "-";
 
-        if (pbo === "-" || brin === "-") {
+        if (pbo === "-") {
             alert((dictionary[currentLang] || dictionary['fr']).alertFields);
             return;
         }
@@ -784,8 +875,11 @@
         archive.push({ pbo, batiment, toro, brin, otdr, power, manchon, notes });
         localStorage.setItem('srf_v3_automated_rows', JSON.stringify(archive));
 
-        const nextBrin = parseInt(brin) + 1;
-        document.getElementById('brinInput').value = nextBrin;
+        // زيادة آلية ذكية للبرا الموالي مع الحفاظ التام على الصياغة الغربية للأرقام
+        let nextBrin = parseInt(brin) + 1;
+        if(nextBrin > 144) nextBrin = 1;
+        
+        document.getElementById('brinInput').value = String(nextBrin);
         
         document.getElementById('otdrInput').value = '';
         document.getElementById('powerInput').value = '';
@@ -821,7 +915,7 @@
                 <td><strong>${item.pbo}</strong></td>
                 <td>${item.batiment}</td>
                 <td><span class="badge-toro">T${item.toro}</span></td>
-                <td><span class="badge-brin">B${item.brin}</span></td>
+                <td><span class="badge-brin">BR ${item.brin}</span></td>
                 <td>${item.otdr}</td>
                 <td>${item.power}</td>
                 <td>${item.manchon}</td>
@@ -850,9 +944,9 @@
             document.getElementById('projectNotesInput').value = '';
             document.getElementById('pboInput').value = '';
             document.getElementById('batimentInput').value = '';
-            document.getElementById('toroInput').value = '';
-            document.getElementById('brinInput').value = '';
-            document.getElementById('liveColorBox').style.display = 'none';
+            document.getElementById('toroInput').value = '1';
+            document.getElementById('brinInput').value = '1';
+            autoCalculateDailyColors();
             loadStoredReport();
         }
     }
