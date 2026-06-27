@@ -313,11 +313,6 @@
             border: 1px solid #2d3748;
         }
 
-        #pdfCaptureArea {
-            padding: 10px;
-            border-radius: 12px;
-        }
-
         .report-header-box {
             background: rgba(0, 210, 255, 0.05);
             border: 1px solid rgba(0, 210, 255, 0.2);
@@ -603,7 +598,6 @@
         oscillator.stop(audioCtx.currentTime + duration);
     }
 
-    // المصفوفة المحدثة تماماً طبقاً للصورة 1000009128.jpg المرسلة من طرفك
     const algerieTelecomColors = {
         fr: [
             { name: "Bleu", hex: "#2980b9" }, { name: "Orange", hex: "#e67e22" }, { name: "Vert", hex: "#27ae60" },
@@ -681,6 +675,18 @@
 
     let currentLang = 'fr';
 
+    // الدالة المسؤولة عن فتح شاشة الدخول بنجاح
+    function enterApp() {
+        playBeep(800, 0.15);
+        document.getElementById('splashScreen').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('splashScreen').style.display = 'none';
+            document.getElementById('appMain').style.display = 'block';
+            autoCalculateDailyColors();
+            loadStoredReport();
+        }, 500);
+    }
+
     function changeLanguage() {
         playBeep(500, 0.05);
         currentLang = document.getElementById('langSelect').value;
@@ -745,7 +751,6 @@
         loadStoredReport();
     }
 
-    // بقية السكريبتات التنفيذية
     function autoCalculateDailyColors() {
         const num = parseInt(document.getElementById('brinInput').value) || 1;
         const liveColorBox = document.getElementById('liveColorBox');
