@@ -115,6 +115,35 @@
             border: 1px solid #2d3748;
         }
 
+        /* تصميم احترافي لخانة اللغات */
+        .lang-custom-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #242933;
+            border: 1px solid var(--neon-blue);
+            padding: 6px 12px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.1);
+        }
+
+        .lang-custom-wrapper i {
+            color: var(--neon-blue);
+            font-size: 16px;
+        }
+
+        .lang-custom-wrapper select {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            outline: none;
+            cursor: pointer;
+            padding: 0;
+            width: auto;
+        }
+
         .nav-bar {
             position: fixed;
             bottom: 0;
@@ -310,7 +339,6 @@
             border: 1px solid #2d3748;
         }
 
-        /* حاوية التقرير القابل للتصدير */
         #pdfCaptureArea {
             padding: 10px;
             border-radius: 12px;
@@ -427,6 +455,7 @@
 </head>
 <body>
 
+<!-- 1. واجهة الدخول الترحيبية -->
 <div id="splashScreen">
     <div class="splash-logo" onclick="playBeep()">
         <i class="fa-solid fa-network-wired"></i>
@@ -436,11 +465,14 @@
     <button class="btn-enter" onclick="enterApp()">ENTER / دخول</button>
 </div>
 
+<!-- 2. واجهة التطبيق الهيكلية -->
 <div class="app-container" id="appMain">
     <header class="no-print">
         <span style="font-weight: bold; color: var(--neon-blue);">SRF APP SOUDUZ</span>
-        <div>
-            <select id="langSelect" onchange="changeLanguage()" style="padding: 5px; width: auto; font-size: 13px; height: auto;">
+        <!-- واجهة اللغات الإحترافية والنيونية المحدثة -->
+        <div class="lang-custom-wrapper">
+            <i class="fa-solid fa-earth-africa"></i>
+            <select id="langSelect" onchange="changeLanguage()">
                 <option value="fr">Français</option>
                 <option value="ar">العربية</option>
                 <option value="en">English</option>
@@ -448,26 +480,28 @@
         </div>
     </header>
 
+    <!-- شريط الأيقونات السفلي للتنقل المستقل الذكي -->
     <div class="nav-bar no-print">
         <div class="nav-item active" id="navProject" onclick="switchTab('project')">
             <i class="fa-solid fa-folder-tree" style="color: var(--neon-purple);"></i>
-            <span id="navTxtProject">Chantier / الميدان</span>
+            <span id="navTxtProject">Chantier</span>
         </div>
         <div class="nav-item" id="navDaily" onclick="switchTab('daily')">
             <i class="fa-solid fa-bolt" style="color: var(--neon-green);"></i>
-            <span id="navTxtDaily">Travail / العمل اليومي</span>
+            <span id="navTxtDaily">Travail</span>
         </div>
         <div class="nav-item" id="navReport" onclick="switchTab('reportTab')">
             <i class="fa-solid fa-file-signature" style="color: var(--neon-blue);"></i>
-            <span id="navTxtReport">Rapport / التقرير</span>
+            <span id="navTxtReport">Rapport</span>
         </div>
     </div>
 
+    <!-- ================= أيقونة 1: بيانات الميدان بالتفصيل ================= -->
     <div id="tabProject" class="tab-content active">
         <div class="card">
             <h2><i class="fa-solid fa-folder-tree" style="color: var(--neon-purple);"></i> <span id="hChantier">Données du Chantier</span></h2>
             <div class="form-group">
-                <label id="lblEntreprise">Nom de l'Entreprise (اسم المقاولة) :</label>
+                <label id="lblEntreprise">Nom de l'Entreprise :</label>
                 <input type="text" id="entrepriseInput" placeholder="Ex: Ets Khaled Fiber" oninput="updateHeaderInfo()">
             </div>
             <div class="form-row">
@@ -476,18 +510,19 @@
                     <input type="text" id="zoneInput" placeholder="Ex: Zone_FTTH_Djelfa_02" oninput="updateHeaderInfo()">
                 </div>
                 <div class="form-group">
-                    <label id="lblSro">SRO (خزانة التوزيع) :</label>
+                    <label id="lblSro">SRO :</label>
                     <input type="text" id="sroInput" placeholder="Ex: SRO-17-05" oninput="updateHeaderInfo()">
                 </div>
             </div>
             <div class="form-group">
-                <label id="lblChantierNotes">Notes Générales du Projet (ملاحظات جغرافية) :</label>
+                <label id="lblChantierNotes">Notes Générales du Projet :</label>
                 <textarea id="projectNotesInput" rows="3" placeholder="Ex: Emplacement à côté de l'APC..."></textarea>
             </div>
             <button class="action-btn" style="background: linear-gradient(90deg, #a855f7 0%, #6b21a8 100%);" onclick="saveProjectConfig()">💾 <span id="btnSaveConfig">Sauvegarder Configuration</span></button>
         </div>
     </div>
 
+    <!-- ================= أيقونة 2: واجهة العمل الميداني المحدثة والمحمية بالكامل ================= -->
     <div id="tabDaily" class="tab-content">
         <div class="card">
             <h2><i class="fa-solid fa-bolt" style="color: var(--neon-green);"></i> <span id="hDaily">Production Journalière</span></h2>
@@ -511,11 +546,11 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <label id="lblBatiment">رقم بناية :</label>
+                    <label id="lblBatiment">Bâtiment :</label>
                     <input type="text" id="batimentInput" placeholder="Ex: 120...">
                 </div>
                 <div class="form-group">
-                    <label id="lblBrin">رقم BR :</label>
+                    <label id="lblBrin">BR :</label>
                     <div class="custom-number-wrapper">
                         <input type="text" id="brinInput" value="1" oninput="cleanAndFormatInput(this); autoCalculateDailyColors();" style="background-color: var(--bg-dark); color: var(--neon-green); direction: ltr;">
                         <div class="custom-spin-buttons">
@@ -526,16 +561,18 @@
                 </div>
             </div>
 
+            <!-- المعاينة التلقائية المترجمة كلياً للألوان الجارية بجانب الكابل -->
             <div class="live-color-container" id="liveColorBox" style="display: flex;">
                 <div id="liveToroTile" class="live-tile">Toro</div>
                 <div id="liveBrinTile" class="live-tile">Brin</div>
             </div>
 
             <div class="form-group">
-                <label id="lblNotes">ملاحظات :</label>
-                <textarea id="notesInput" rows="2" placeholder="اكتب ملاحظات اللحام هنا..."></textarea>
+                <label id="lblNotes">Observations :</label>
+                <textarea id="notesInput" rows="2" placeholder="Ex: Soudure stable..."></textarea>
             </div>
 
+            <!-- القياسات الفنية الاختيارية للأجهزة -->
             <div class="optional-header" onclick="toggleOptionalFields()">
                 <span><i class="fa-solid fa-gauge-high"></i> <span id="txtOptionalTitle">Mesures Appareils (OTDR / Power) - Optionnel</span></span>
                 <i class="fa-solid fa-chevron-down" id="optionalChevron"></i>
@@ -544,11 +581,11 @@
             <div class="optional-fields" id="optionalFieldsSection">
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Test OTDR (Loss dB) :</label>
+                        <label id="lblOtdrField">Test OTDR (Loss dB) :</label>
                         <input type="text" id="otdrInput" placeholder="Ex: 0.02 dB">
                     </div>
                     <div class="form-group">
-                        <label>Power Meter (dBm) :</label>
+                        <label id="lblPowerField">Power Meter (dBm) :</label>
                         <input type="text" id="powerInput" placeholder="Ex: -19.2 dBm">
                     </div>
                 </div>
@@ -562,19 +599,20 @@
         </div>
     </div>
 
+    <!-- ================= أيقونة 3: التقرير النهائي المنسق بالكامل ================= -->
     <div id="tabReportTab" class="tab-content">
         <div class="card" id="reportArea">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <h2 id="titleReport" style="margin:0;"><i class="fa-solid fa-file-invoice icon-list"></i> Rapport Final</h2>
-                <button class="print-btn no-print" onclick="downloadReportAsPDF()"><i class="fa-solid fa-file-pdf"></i> <span id="btnTxtPdf">حفظ التقرير PDF</span></button>
+                <button class="print-btn no-print" onclick="downloadReportAsPDF()"><i class="fa-solid fa-file-pdf"></i> <span id="btnTxtPdf">Sauvegarder PDF</span></button>
             </div>
             
             <div id="pdfCaptureArea">
                 <div class="report-header-box">
                     <p><strong id="repLblEntreprise">Entreprise :</strong> <span id="repEntrepriseName">-</span></p>
                     <p><strong id="lblRepZone">Zone :</strong> <span id="repZoneName">-</span></p>
-                    <p><strong>SRO :</strong> <span id="repSroName">-</span></p>
-                    <p><strong>Client :</strong> Algérie Telecom (اتصالات الجزائر)</p>
+                    <p><strong id="repLblSro">SRO :</strong> <span id="repSroName">-</span></p>
+                    <p><strong id="repLblClient">Client :</strong> <span id="repClientValue">Algérie Telecom</span></p>
                 </div>
 
                 <div class="table-responsive">
@@ -584,7 +622,7 @@
                                 <th>LINE</th>
                                 <th id="thToro">T</th>
                                 <th id="thBatiment">Bâtiment</th>
-                                <th id="thBrin">BR (Brin)</th>
+                                <th id="thBrin">BR</th>
                                 <th>OTDR</th>
                                 <th>Power Meter</th>
                                 <th id="thManchon">Manchon</th>
@@ -593,7 +631,8 @@
                             </tr>
                         </thead>
                         <tbody id="tableRows">
-                            </tbody>
+                            <!-- الأسطر المضافة برمجياً -->
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -602,11 +641,9 @@
         </div>
     </div>
 
-    <footer class="no-print">
-        <div>كل الحقوق محفوظة © 2026 | المطور <strong>khaledsaadeddine</strong></div>
-        <a href="https://www.facebook.com/share/1Kym9fs88B/" target="_blank">
-            <i class="fa-brands fa-facebook" style="color: #1877f2; font-size: 16px;"></i> التواصل عبر فيسبوك / Facebook
-        </a>
+    <!-- أسفل التطبيق الاحترافي المترجم كلياً -->
+    <footer class="no-print" id="appFooter">
+        Tous droits réservés © 2026 | Développeur khaledsaadeddine
     </footer>
 </div>
 
@@ -626,46 +663,80 @@
         oscillator.stop(audioCtx.currentTime + duration);
     }
 
-    const algerieTelecomColors = [
-        { fr: "Rouge", ar: "أحمر", en: "Red", hex: "#e74c3c" },
-        { fr: "Bleu", ar: "أزرق", en: "Blue", hex: "#2980b9" },
-        { fr: "Vert", ar: "أخضر", en: "Green", hex: "#27ae60" },
-        { fr: "Jaune", ar: "أصفر", en: "Yellow", hex: "#f1c40f" },
-        { fr: "Violet", ar: "بنفسجي", en: "Violet", hex: "#8e44ad" },
-        { fr: "Blanc", ar: "أبيض", en: "White", hex: "#ffffff", darkText: true },
-        { fr: "Gris", ar: "رمادي", en: "Grey", hex: "#7f8c8d" },
-        { fr: "Marron", ar: "بني", en: "Brown", hex: "#8b4513" },
-        { fr: "Noir", ar: "أسود", en: "Black", hex: "#000000" },
-        { fr: "Orange", ar: "برتقالي", en: "Orange", hex: "#e67e22" },
-        { fr: "Rose", ar: "وردي", en: "Pink", hex: "#fd79a8", darkText: true },
-        { fr: "Aqua", ar: "فيروزي", en: "Aqua", hex: "#00ced1", darkText: true }
-    ];
+    // مصفوفة الألوان المترجمة بدقة وصارمة لكل لغة بشكل منفصل
+    const algerieTelecomColors = {
+        fr: [
+            { name: "Rouge", hex: "#e74c3c" }, { name: "Bleu", hex: "#2980b9" }, { name: "Vert", hex: "#27ae60" },
+            { name: "Jaune", hex: "#f1c40f" }, { name: "Violet", hex: "#8e44ad" }, { name: "Blanc", hex: "#ffffff", darkText: true },
+            { name: "Gris", hex: "#7f8c8d" }, { name: "Marron", hex: "#8b4513" }, { name: "Noir", hex: "#000000" },
+            { name: "Orange", hex: "#e67e22" }, { name: "Rose", hex: "#fd79a8", darkText: true }, { name: "Aqua", hex: "#00ced1", darkText: true }
+        ],
+        ar: [
+            { name: "أحمر", hex: "#e74c3c" }, { name: "أزرق", hex: "#2980b9" }, { name: "أخضر", hex: "#27ae60" },
+            { name: "أصفر", hex: "#f1c40f" }, { name: "بنفسجي", hex: "#8e44ad" }, { name: "أبيض", hex: "#ffffff", darkText: true },
+            { name: "رمادي", hex: "#7f8c8d" }, { name: "بني", hex: "#8b4513" }, { name: "أسود", hex: "#000000" },
+            { name: "برتقالي", hex: "#e67e22" }, { name: "وردي", hex: "#fd79a8", darkText: true }, { name: "فيروزي", hex: "#00ced1", darkText: true }
+        ],
+        en: [
+            { name: "Red", hex: "#e74c3c" }, { name: "Blue", hex: "#2980b9" }, { name: "Green", hex: "#27ae60" },
+            { name: "Yellow", hex: "#f1c40f" }, { name: "Violet", hex: "#8e44ad" }, { name: "White", hex: "#ffffff", darkText: true },
+            { name: "Grey", hex: "#7f8c8d" }, { name: "Brown", hex: "#8b4513" }, { name: "Black", hex: "#000000" },
+            { name: "Orange", hex: "#e67e22" }, { name: "Pink", hex: "#fd79a8", darkText: true }, { name: "Aqua", hex: "#00ced1", darkText: true }
+        ]
+    };
 
+    // القاموس الشامل والملزم للتطبيق لمنع بقاء أي كلمة باللغات الأخرى
     const dictionary = {
         fr: {
-            navProject: "Chantier / الميدان", navDaily: "Travail / العمل اليومي", navReport: "Rapport / التقرير",
-            hChantier: "Données Géographiques & Configuration", hDaily: "Saisie Terrain Suivant Plan",
-            lblEntreprise: "Nom de l'Entreprise (اسم المقاولة) :", lblZone: "Zone d'influence :", lblSro: "SRO (خزانة التوزيع) :",
+            navProject: "Chantier", navDaily: "Travail", navReport: "Rapport",
+            hChantier: "Données du Chantier", hDaily: "Production Journalière",
+            lblEntreprise: "Nom de l'Entreprise :", lblZone: "Zone d'influence :", lblSro: "SRO :",
             lblChantierNotes: "Notes Générales du Projet :", btnSaveConfig: "Sauvegarder Configuration",
-            lblLine: "LINE :", lblBatiment: "Bâtiment / رقم بناية :", lblToro: "T :", lblBrin: "رقم BR :",
-            lblNotes: "ملاحظات :", btnSaveDaily: "Enregistrer & Passer au Suivant", 
-            titleReport: "Rapport Final - Zone d'influence", repLblEntreprise: "Entreprise :", lblRepZone: "Zone :",
+            lblLine: "LINE :", lblBatiment: "Bâtiment :", lblToro: "T :", lblBrin: "BR :",
+            lblNotes: "Observations :", btnSaveDaily: "Enregistrer & Passer au Suivant", 
+            titleReport: "Rapport Final", repLblEntreprise: "Entreprise :", lblRepZone: "Zone :", repLblSro: "SRO :",
+            repLblClient: "Client :", repClientValue: "Algérie Telecom",
             thBatiment: "Bâtiment", thToro: "T", thBrin: "BR", thManchon: "Manchon", thNotes: "Observations", thAction: "Action",
             btnClear: "Réinitialiser Tout", alertFields: "Veuillez renseigner le LINE !",
-            toroNum: "T N°", brinNum: "BR N°", txtOptionalTitle: "Mesures Appareils (OTDR / Power) - Optionnel",
-            lblManchon: "Manchon / Sleeve :", btnTxtPdf: "Sauvegarder PDF"
+            toroNum: "Toro", brinNum: "Brin", txtOptionalTitle: "Mesures Appareils (OTDR / Power) - Optionnel",
+            lblOtdrField: "Test OTDR (Loss dB) :", lblPowerField: "Power Meter (dBm) :", lblManchon: "Manchon / Sleeve :", btnTxtPdf: "Sauvegarder PDF",
+            phEntreprise: "Ex: Ets Khaled Fiber", phZone: "Ex: Zone_FTTH_Djelfa_02", phSro: "Ex: SRO-17-05", phNotesGeog: "Ex: À côté de l'APC...",
+            phLine: "Ex: A", phBatiment: "Ex: 120...", phNotesDaily: "Ex: Soudure stable...", phOtdr: "Ex: 0.02 dB", phPower: "Ex: -19.2 dBm", phManchon: "Ex: Dome 04",
+            footerText: "Tous droits réservés © 2026 | Développeur khaledsaadeddine", confirmClear: "Voulez-vous tout réinitialiser ?"
         },
         ar: {
             navProject: "بيانات الميدان", navDaily: "العمل اليومي", navReport: "التقرير النهائي",
-            hChantier: "بيانات الموقع الاستراتيجية والتكوين العام", hDaily: "واجهة العمل الميداني واللحام اليومي المباشر",
-            lblEntreprise: "اسم الشركة / المقاولة المنفذة :", lblZone: "منطقة التأثير (Zone) :", lblSro: "خزانة التوزيع (SRO) :",
-            lblChantierNotes: "ملاحظات جغرافية عامة حول منطقة المشروع :", btnSaveConfig: "تأمين وحفظ تكوين الميدان",
+            hChantier: "بيانات الموقع الاستراتيجية", hDaily: "واجهة العمل الميداني واللحام",
+            lblEntreprise: "اسم الشركة / المقاولة :", lblZone: "منطقة التأثير (Zone) :", lblSro: "خزانة التوزيع (SRO) :",
+            lblChantierNotes: "ملاحظات عامة حول المشروع :", btnSaveConfig: "حفظ وتأمين التكوين",
             lblLine: "الخط LINE :", lblBatiment: "رقم البناية :", lblToro: "تورو T :", lblBrin: "رقم البرا BR :",
-            lblNotes: "الملاحظات الفنية :", btnSaveDaily: "تسجيل خط اللحام والانتقال للتالي", titleReport: "التقرير النهائي الهندسي لـ Zone d'influence",
-            repLblEntreprise: "المقاول المنفذ :", lblRepZone: "المنطقة :", thBatiment: "البناية", thToro: "T", thBrin: "BR", thManchon: "المونشو",
-            thNotes: "الملاحظات", thAction: "إجراء", btnClear: "مسح وتصفير كافة البيانات", alertFields: "يجب إدخال خانة LINE لحفظ العمل اليومي!",
-            toroNum: "تورو رقم", brinNum: "برا رقم", txtOptionalTitle: "قياسات الأجهزة الفنية (OTDR / باور ماتر) - اختيارية",
-            lblManchon: "علبة الحماية أو المونشو :", btnTxtPdf: "تحميل وحفظ كـ PDF"
+            lblNotes: "الملاحظات الفنية :", btnSaveDaily: "تسجيل خط اللحام والانتقال للتالي", 
+            titleReport: "التقرير النهائي الهندسي", repLblEntreprise: "المقاول :", lblRepZone: "المنطقة :", repLblSro: "خزانة SRO :",
+            repLblClient: "الزبون :", repClientValue: "اتصالات الجزائر",
+            thBatiment: "البناية", thToro: "تورو", thBrin: "برا", thManchon: "المونشو", thNotes: "الملاحظات", thAction: "إجراء",
+            btnClear: "مسح وتصفير كافة البيانات", alertFields: "يجب إدخال خانة LINE لحفظ العمل اليومي!",
+            toroNum: "تورو", brinNum: "برا", txtOptionalTitle: "قياسات الأجهزة (OTDR / باور ماتر) - اختيارية",
+            lblOtdrField: "قياس الـ OTDR (ديسيبل) :", lblPowerField: "قياس الباور ماتر (dBm) :", lblManchon: "علبة الحماية أو المونشو :", btnTxtPdf: "تحميل وحفظ كـ PDF",
+            phEntreprise: "مثال: مقاولة خالد للألياف الضوئية", phZone: "مثال: منطقة_FTTH_الجلفة_02", phSro: "مثال: SRO-17-05", phNotesGeog: "مثال: بجانب مقر البلدية...",
+            phLine: "مثال: A", phBatiment: "مثال: 120...", phNotesDaily: "مثال: لحام مستقر جاد...", phOtdr: "مثال: 0.02 dB", phPower: "مثال: -19.2 dBm", phManchon: "مثال: مونشو 04",
+            footerText: "كل الحقوق محفوظة © 2026 | المطور khaledsaadeddine", confirmClear: "هل تريد مسح وتصفير كافة البيانات للبدء في منطقة جديدة؟"
+        },
+        en: {
+            navProject: "Project Data", navDaily: "Daily Work", navReport: "Final Report",
+            hChantier: "Project Site Configuration", hDaily: "Daily Production Entry",
+            lblEntreprise: "Company Name :", lblZone: "Zone of Influence :", lblSro: "SRO Box :",
+            lblChantierNotes: "General Project Notes :", btnSaveConfig: "Save Site Configuration",
+            lblLine: "LINE :", lblBatiment: "Building No :", lblToro: "T :", lblBrin: "BR :",
+            lblNotes: "Observations :", btnSaveDaily: "Save Entry & Next", 
+            titleReport: "Comprehensive Final Report", repLblEntreprise: "Contractor:", lblRepZone: "Zone:", repLblSro: "SRO:",
+            repLblClient: "Client:", repClientValue: "Algérie Telecom",
+            thBatiment: "Building", thToro: "T", thBrin: "BR", thManchon: "Sleeve", thNotes: "Observations", thAction: "Action",
+            btnClear: "Reset All Database", alertFields: "Please fill out the LINE field!",
+            toroNum: "Toro", brinNum: "Brin", txtOptionalTitle: "Device Measurements (OTDR / Power Meter) - Optional",
+            lblOtdrField: "OTDR Test (Loss dB) :", lblPowerField: "Power Meter (dBm) :", lblManchon: "Manchon / Sleeve Type :", btnTxtPdf: "Download PDF",
+            phEntreprise: "Ex: Khaled Fiber Company", phZone: "Ex: Zone_FTTH_Djelfa_02", phSro: "Ex: SRO-17-05", phNotesGeog: "Ex: Near the APC office...",
+            phLine: "Ex: A", phBatiment: "Ex: 120...", phNotesDaily: "Ex: Stable splicing...", phOtdr: "Ex: 0.02 dB", phPower: "Ex: -19.2 dBm", phManchon: "Ex: Dome 04",
+            footerText: "All rights reserved © 2026 | Developer khaledsaadeddine", confirmClear: "Are you sure you want to reset all data?"
         }
     };
 
@@ -739,6 +810,7 @@
         autoCalculateDailyColors();
     }
 
+    // الدالة المسؤولة عن تبديل اللغات الصارم ومسح أي تداخل نصي
     function changeLanguage() {
         playBeep(500, 0.05);
         currentLang = document.getElementById('langSelect').value;
@@ -746,31 +818,50 @@
         
         document.body.style.direction = (currentLang === 'ar') ? 'rtl' : 'ltr';
 
+        // 1. تبديل نصوص شريط التنقل السفلي والعلوي
         document.getElementById('navTxtProject').innerText = d.navProject;
         document.getElementById('navTxtDaily').innerText = d.navDaily;
         document.getElementById('navTxtReport').innerText = d.navReport;
 
+        // 2. تبديل نصوص التبويب الأول (Chantier) والـ Placeholders
         document.getElementById('hChantier').innerText = d.hChantier;
-        document.getElementById('hDaily').innerText = d.hDaily;
         document.getElementById('lblEntreprise').innerText = d.lblEntreprise;
+        document.getElementById('entrepriseInput').placeholder = d.phEntreprise;
         document.getElementById('lblZone').innerText = d.lblZone;
+        document.getElementById('zoneInput').placeholder = d.phZone;
         document.getElementById('lblSro').innerText = d.lblSro;
+        document.getElementById('sroInput').placeholder = d.phSro;
         document.getElementById('lblChantierNotes').innerText = d.lblChantierNotes;
+        document.getElementById('projectNotesInput').placeholder = d.phNotesGeog;
         document.getElementById('btnSaveConfig').innerText = d.btnSaveConfig;
 
+        // 3. تبديل نصوص التبويب الثاني (Travail) والـ Placeholders
+        document.getElementById('hDaily').innerText = d.hDaily;
         document.getElementById('lblLine').innerText = d.lblLine;
-        document.getElementById('lblBatiment').innerText = d.lblBatiment;
+        document.getElementById('pboInput').placeholder = d.phLine;
         document.getElementById('lblToro').innerText = d.lblToro;
+        document.getElementById('lblBatiment').innerText = d.lblBatiment;
+        document.getElementById('batimentInput').placeholder = d.phBatiment;
         document.getElementById('lblBrin').innerText = d.lblBrin;
         document.getElementById('lblNotes').innerText = d.lblNotes;
-        document.getElementById('btnSaveDaily').innerText = d.btnSaveDaily;
+        document.getElementById('notesInput').placeholder = d.phNotesDaily;
         document.getElementById('txtOptionalTitle').innerText = d.txtOptionalTitle;
+        document.getElementById('lblOtdrField').innerText = d.lblOtdrField;
+        document.getElementById('otdrInput').placeholder = d.phOtdr;
+        document.getElementById('lblPowerField').innerText = d.lblPowerField;
+        document.getElementById('powerInput').placeholder = d.phPower;
         document.getElementById('lblManchon').innerText = d.lblManchon;
-        document.getElementById('btnTxtPdf').innerText = d.btnTxtPdf;
+        document.getElementById('manchonInput').placeholder = d.phManchon;
+        document.getElementById('btnSaveDaily').innerText = d.btnSaveDaily;
         
+        // 4. تبديل نصوص التبويب الثالث (Rapport) والجدول الهيدر
         document.getElementById('titleReport').innerText = d.titleReport;
         document.getElementById('repLblEntreprise').innerText = d.repLblEntreprise;
         document.getElementById('lblRepZone').innerText = d.lblRepZone;
+        document.getElementById('repLblSro').innerText = d.repLblSro;
+        document.getElementById('repLblClient').innerText = d.repLblClient;
+        document.getElementById('repClientValue').innerText = d.repClientValue;
+        document.getElementById('btnTxtPdf').innerText = d.btnTxtPdf;
 
         document.getElementById('thBatiment').innerText = d.thBatiment;
         document.getElementById('thToro').innerText = d.thToro;
@@ -779,6 +870,9 @@
         document.getElementById('thNotes').innerText = d.thNotes;
         document.getElementById('thAction').innerText = d.thAction;
         document.getElementById('btnClear').innerText = d.btnClear;
+
+        // 5. تبديل الفوتر وأسفل الصفحة
+        document.getElementById('appFooter').innerText = d.footerText;
 
         autoCalculateDailyColors();
         loadStoredReport();
@@ -794,17 +888,18 @@
         const toroIndex = Math.ceil(num / 12);
         const brinIndex = (num - 1) % 12;
 
-        const toroColor = algerieTelecomColors[(toroIndex - 1) % 12];
-        const brinColor = algerieTelecomColors[brinIndex];
+        const toroColor = algerieTelecomColors[currentLang][(toroIndex - 1) % 12];
+        const brinColor = algerieTelecomColors[currentLang][brinIndex];
 
+        document.getElementById('toroInput').value = String(toroIndex);
         liveColorBox.style.display = 'flex';
 
         liveToroTile.style.backgroundColor = toroColor.hex;
-        liveToroTile.innerText = `${d.toroNum} ${toroIndex}: ${currentLang === 'ar' ? toroColor.ar : toroColor.fr}`;
+        liveToroTile.innerText = `${d.toroNum} ${toroIndex}: ${toroColor.name}`;
         liveToroTile.style.color = toroColor.darkText ? '#000' : '#fff';
 
         liveBrinTile.style.backgroundColor = brinColor.hex;
-        liveBrinTile.innerText = `${d.brinNum} ${num}: ${currentLang === 'ar' ? brinColor.ar : brinColor.fr}`;
+        liveBrinTile.innerText = `${d.brinNum} ${num}: ${brinColor.name}`;
         liveBrinTile.style.color = brinColor.darkText ? '#000' : '#fff';
     }
 
@@ -830,7 +925,7 @@
         localStorage.setItem('srf_sro', sro);
         localStorage.setItem('srf_pnotes', pNotes);
         
-        alert(currentLang === 'ar' ? "تم حفظ بيانات الميدان الإستراتيجية بنجاح!" : "Configuration du chantier sauvegardée !");
+        alert(currentLang === 'ar' ? "تم حفظ بيانات الميدان بنجاح!" : "Configuration du chantier sauvegardée !");
         updateHeaderInfo();
     }
 
@@ -859,7 +954,6 @@
         if(nextBrin > 144) nextBrin = 1;
         
         document.getElementById('brinInput').value = String(nextBrin);
-        
         document.getElementById('otdrInput').value = '';
         document.getElementById('powerInput').value = '';
         document.getElementById('notesInput').value = '';
@@ -913,13 +1007,11 @@
         loadStoredReport();
     }
 
-    // دالة توليد وتحميل الـ PDF الفورية والذكية ميدانياً
     function downloadReportAsPDF() {
         playBeep(900, 0.15);
         const element = document.getElementById('pdfCaptureArea');
         const zoneName = localStorage.getItem('srf_zone') || 'Zone_FTTH';
         
-        // إعدادات التصدير للحفاظ على التنسيق عالي التباين
         const opt = {
             margin:       10,
             filename:     `Rapport_Soudure_${zoneName}.pdf`,
@@ -928,13 +1020,12 @@
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
         };
 
-        // بدء معالجة وتوليد الملف وتحميله تلقائياً
         html2pdf().set(opt).from(element).save();
     }
 
     function clearData() {
         playBeep(300, 0.2);
-        if (confirm(currentLang === 'ar' ? "هل تريد مسح وتصفير كافة البيانات للبدء في منطقة جديدة؟" : "Voulez-vous tout réinitialiser ?")) {
+        if (confirm(dictionary[currentLang].confirmClear)) {
             localStorage.clear();
             document.getElementById('entrepriseInput').value = '';
             document.getElementById('zoneInput').value = '';
