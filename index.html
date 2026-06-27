@@ -29,7 +29,6 @@
             user-select: none;
         }
 
-        /* 1. الواجهة الأولية الترحيبية */
         #splashScreen {
             position: fixed;
             top: 0;
@@ -57,7 +56,6 @@
             margin-bottom: 20px;
             font-size: 40px;
             color: white;
-            animation: pulse 2s infinite;
         }
 
         .splash-title {
@@ -93,10 +91,8 @@
             background: var(--neon-green);
             color: var(--bg-dark);
             box-shadow: 0 0 25px rgba(0, 255, 135, 0.5);
-            transform: translateY(-2px);
         }
 
-        /* 2. الواجهة الرئيسية والتنقل بالأيقونات */
         .app-container {
             max-width: 750px;
             margin: 0 auto;
@@ -115,7 +111,6 @@
             border: 1px solid #2d3748;
         }
 
-        /* تصميم احترافي لخانة اللغات */
         .lang-custom-wrapper {
             display: flex;
             align-items: center;
@@ -124,7 +119,6 @@
             border: 1px solid var(--neon-blue);
             padding: 6px 12px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.1);
         }
 
         .lang-custom-wrapper i {
@@ -165,7 +159,6 @@
             cursor: pointer;
             font-size: 12px;
             font-weight: 500;
-            transition: color 0.3s;
         }
 
         .nav-item i {
@@ -175,9 +168,6 @@
 
         .nav-item.active {
             color: var(--neon-blue);
-        }
-        .nav-item.active i {
-            filter: drop-shadow(0 0 8px var(--neon-blue));
         }
 
         .tab-content {
@@ -194,7 +184,6 @@
             border-radius: 16px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         h2 {
@@ -238,13 +227,6 @@
             color: white;
             box-sizing: border-box;
             font-size: 15px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: border 0.3s;
-        }
-
-        input:focus, textarea:focus, select:focus {
-            border-color: var(--neon-blue);
-            outline: none;
         }
 
         .custom-number-wrapper {
@@ -258,7 +240,6 @@
             text-align: center;
             font-weight: bold;
             font-size: 16px;
-            letter-spacing: 1px;
         }
 
         .custom-spin-buttons {
@@ -277,12 +258,6 @@
             font-size: 10px;
             cursor: pointer;
             border-radius: 4px;
-            transition: background 0.2s;
-        }
-
-        .spin-btn:hover {
-            background: var(--neon-blue);
-            color: black;
         }
 
         .action-btn {
@@ -295,7 +270,6 @@
             border-radius: 10px;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 4px 10px rgba(0, 198, 255, 0.2);
         }
 
         .live-color-container {
@@ -357,15 +331,6 @@
             font-size: 14px;
         }
 
-        .report-header-box p {
-            margin: 0;
-            color: var(--text-muted);
-        }
-
-        .report-header-box p strong {
-            color: var(--neon-blue);
-        }
-
         .table-responsive {
             width: 100%;
             overflow-x: auto;
@@ -389,12 +354,10 @@
         th {
             background-color: #1e222b;
             color: var(--neon-blue);
-            font-weight: 600;
         }
 
         td {
             background-color: rgba(26, 29, 36, 0.2);
-            color: var(--text-main);
         }
 
         .badge-toro {
@@ -430,7 +393,6 @@
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.2);
         }
 
         footer {
@@ -441,21 +403,10 @@
             font-size: 13px;
             color: var(--text-muted);
         }
-
-        footer a {
-            color: var(--neon-blue);
-            text-decoration: none;
-            margin-top: 8px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
 
-<!-- 1. واجهة الدخول الترحيبية -->
 <div id="splashScreen">
     <div class="splash-logo" onclick="playBeep()">
         <i class="fa-solid fa-network-wired"></i>
@@ -465,11 +416,9 @@
     <button class="btn-enter" onclick="enterApp()">ENTER / دخول</button>
 </div>
 
-<!-- 2. واجهة التطبيق الهيكلية -->
 <div class="app-container" id="appMain">
-    <header class="no-print">
-        <span style="font-weight: bold; color: var(--neon-blue);">SRF APP SOUDUZ</span>
-        <!-- واجهة اللغات الإحترافية والنيونية المحدثة -->
+    <header>
+        <span style="font-weight: bold; color: var(--neon-blue);" id="appLogoName">SRF APP SOUDUZ</span>
         <div class="lang-custom-wrapper">
             <i class="fa-solid fa-earth-africa"></i>
             <select id="langSelect" onchange="changeLanguage()">
@@ -480,7 +429,6 @@
         </div>
     </header>
 
-    <!-- شريط الأيقونات السفلي للتنقل المستقل الذكي -->
     <div class="nav-bar no-print">
         <div class="nav-item active" id="navProject" onclick="switchTab('project')">
             <i class="fa-solid fa-folder-tree" style="color: var(--neon-purple);"></i>
@@ -496,7 +444,6 @@
         </div>
     </div>
 
-    <!-- ================= أيقونة 1: بيانات الميدان بالتفصيل ================= -->
     <div id="tabProject" class="tab-content active">
         <div class="card">
             <h2><i class="fa-solid fa-folder-tree" style="color: var(--neon-purple);"></i> <span id="hChantier">Données du Chantier</span></h2>
@@ -522,7 +469,6 @@
         </div>
     </div>
 
-    <!-- ================= أيقونة 2: واجهة العمل الميداني المحدثة والمحمية بالكامل ================= -->
     <div id="tabDaily" class="tab-content">
         <div class="card">
             <h2><i class="fa-solid fa-bolt" style="color: var(--neon-green);"></i> <span id="hDaily">Production Journalière</span></h2>
@@ -561,7 +507,6 @@
                 </div>
             </div>
 
-            <!-- المعاينة التلقائية المترجمة كلياً للألوان الجارية بجانب الكابل -->
             <div class="live-color-container" id="liveColorBox" style="display: flex;">
                 <div id="liveToroTile" class="live-tile">Toro</div>
                 <div id="liveBrinTile" class="live-tile">Brin</div>
@@ -572,7 +517,6 @@
                 <textarea id="notesInput" rows="2" placeholder="Ex: Soudure stable..."></textarea>
             </div>
 
-            <!-- القياسات الفنية الاختيارية للأجهزة -->
             <div class="optional-header" onclick="toggleOptionalFields()">
                 <span><i class="fa-solid fa-gauge-high"></i> <span id="txtOptionalTitle">Mesures Appareils (OTDR / Power) - Optionnel</span></span>
                 <i class="fa-solid fa-chevron-down" id="optionalChevron"></i>
@@ -599,7 +543,6 @@
         </div>
     </div>
 
-    <!-- ================= أيقونة 3: التقرير النهائي المنسق بالكامل ================= -->
     <div id="tabReportTab" class="tab-content">
         <div class="card" id="reportArea">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
@@ -619,7 +562,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>LINE</th>
+                                <th id="thLine">LINE</th>
                                 <th id="thToro">T</th>
                                 <th id="thBatiment">Bâtiment</th>
                                 <th id="thBrin">BR</th>
@@ -630,9 +573,7 @@
                                 <th class="no-print" id="thAction">Action</th>
                             </tr>
                         </thead>
-                        <tbody id="tableRows">
-                            <!-- الأسطر المضافة برمجياً -->
-                        </tbody>
+                        <tbody id="reportTableRows"></tbody>
                     </table>
                 </div>
             </div>
@@ -641,8 +582,7 @@
         </div>
     </div>
 
-    <!-- أسفل التطبيق الاحترافي المترجم كلياً -->
-    <footer class="no-print" id="appFooter">
+    <footer id="appFooter">
         Tous droits réservés © 2026 | Développeur khaledsaadeddine
     </footer>
 </div>
@@ -663,32 +603,31 @@
         oscillator.stop(audioCtx.currentTime + duration);
     }
 
-    // مصفوفة الألوان المترجمة بدقة وصارمة لكل لغة بشكل منفصل
+    // المصفوفة المحدثة تماماً طبقاً للصورة 1000009128.jpg المرسلة من طرفك
     const algerieTelecomColors = {
         fr: [
-            { name: "Rouge", hex: "#e74c3c" }, { name: "Bleu", hex: "#2980b9" }, { name: "Vert", hex: "#27ae60" },
-            { name: "Jaune", hex: "#f1c40f" }, { name: "Violet", hex: "#8e44ad" }, { name: "Blanc", hex: "#ffffff", darkText: true },
-            { name: "Gris", hex: "#7f8c8d" }, { name: "Marron", hex: "#8b4513" }, { name: "Noir", hex: "#000000" },
-            { name: "Orange", hex: "#e67e22" }, { name: "Rose", hex: "#fd79a8", darkText: true }, { name: "Aqua", hex: "#00ced1", darkText: true }
+            { name: "Bleu", hex: "#2980b9" }, { name: "Orange", hex: "#e67e22" }, { name: "Vert", hex: "#27ae60" },
+            { name: "Marron", hex: "#8b4513" }, { name: "Gris", hex: "#7f8c8d" }, { name: "Blanc", hex: "#ffffff", darkText: true },
+            { name: "Rouge", hex: "#e74c3c" }, { name: "Noir", hex: "#000000" }, { name: "Jaune", hex: "#f1c40f" },
+            { name: "Violet", hex: "#8e44ad" }, { name: "Rose", hex: "#fd79a8", darkText: true }, { name: "Aqua", hex: "#00ced1", darkText: true }
         ],
         ar: [
-            { name: "أحمر", hex: "#e74c3c" }, { name: "أزرق", hex: "#2980b9" }, { name: "أخضر", hex: "#27ae60" },
-            { name: "أصفر", hex: "#f1c40f" }, { name: "بنفسجي", hex: "#8e44ad" }, { name: "أبيض", hex: "#ffffff", darkText: true },
-            { name: "رمادي", hex: "#7f8c8d" }, { name: "بني", hex: "#8b4513" }, { name: "أسود", hex: "#000000" },
-            { name: "برتقالي", hex: "#e67e22" }, { name: "وردي", hex: "#fd79a8", darkText: true }, { name: "فيروزي", hex: "#00ced1", darkText: true }
+            { name: "أزرق", hex: "#2980b9" }, { name: "برتقالي", hex: "#e67e22" }, { name: "أخضر", hex: "#27ae60" },
+            { name: "بني", hex: "#8b4513" }, { name: "رمادي", hex: "#7f8c8d" }, { name: "أبيض", hex: "#ffffff", darkText: true },
+            { name: "أحمر", hex: "#e74c3c" }, { name: "أسود", hex: "#000000" }, { name: "أصفر", hex: "#f1c40f" },
+            { name: "بنفسجي", hex: "#8e44ad" }, { name: "وردي", hex: "#fd79a8", darkText: true }, { name: "فيروزي", hex: "#00ced1", darkText: true }
         ],
         en: [
-            { name: "Red", hex: "#e74c3c" }, { name: "Blue", hex: "#2980b9" }, { name: "Green", hex: "#27ae60" },
-            { name: "Yellow", hex: "#f1c40f" }, { name: "Violet", hex: "#8e44ad" }, { name: "White", hex: "#ffffff", darkText: true },
-            { name: "Grey", hex: "#7f8c8d" }, { name: "Brown", hex: "#8b4513" }, { name: "Black", hex: "#000000" },
-            { name: "Orange", hex: "#e67e22" }, { name: "Pink", hex: "#fd79a8", darkText: true }, { name: "Aqua", hex: "#00ced1", darkText: true }
+            { name: "Blue", hex: "#2980b9" }, { name: "Orange", hex: "#e67e22" }, { name: "Green", hex: "#27ae60" },
+            { name: "Brown", hex: "#8b4513" }, { name: "Grey", hex: "#7f8c8d" }, { name: "White", hex: "#ffffff", darkText: true },
+            { name: "Red", hex: "#e74c3c" }, { name: "Black", hex: "#000000" }, { name: "Yellow", hex: "#f1c40f" },
+            { name: "Violet", hex: "#8e44ad" }, { name: "Pink", hex: "#fd79a8", darkText: true }, { name: "Aqua", hex: "#00ced1", darkText: true }
         ]
     };
 
-    // القاموس الشامل والملزم للتطبيق لمنع بقاء أي كلمة باللغات الأخرى
     const dictionary = {
         fr: {
-            navProject: "Chantier", navDaily: "Travail", navReport: "Rapport",
+            appLogoName: "SRF APP SOUDUZ", navProject: "Chantier", navDaily: "Travail", navReport: "Rapport",
             hChantier: "Données du Chantier", hDaily: "Production Journalière",
             lblEntreprise: "Nom de l'Entreprise :", lblZone: "Zone d'influence :", lblSro: "SRO :",
             lblChantierNotes: "Notes Générales du Projet :", btnSaveConfig: "Sauvegarder Configuration",
@@ -696,7 +635,7 @@
             lblNotes: "Observations :", btnSaveDaily: "Enregistrer & Passer au Suivant", 
             titleReport: "Rapport Final", repLblEntreprise: "Entreprise :", lblRepZone: "Zone :", repLblSro: "SRO :",
             repLblClient: "Client :", repClientValue: "Algérie Telecom",
-            thBatiment: "Bâtiment", thToro: "T", thBrin: "BR", thManchon: "Manchon", thNotes: "Observations", thAction: "Action",
+            thLine: "LINE", thBatiment: "Bâtiment", thToro: "T", thBrin: "BR", thManchon: "Manchon", thNotes: "Observations", thAction: "Action",
             btnClear: "Réinitialiser Tout", alertFields: "Veuillez renseigner le LINE !",
             toroNum: "Toro", brinNum: "Brin", txtOptionalTitle: "Mesures Appareils (OTDR / Power) - Optionnel",
             lblOtdrField: "Test OTDR (Loss dB) :", lblPowerField: "Power Meter (dBm) :", lblManchon: "Manchon / Sleeve :", btnTxtPdf: "Sauvegarder PDF",
@@ -705,24 +644,24 @@
             footerText: "Tous droits réservés © 2026 | Développeur khaledsaadeddine", confirmClear: "Voulez-vous tout réinitialiser ?"
         },
         ar: {
-            navProject: "بيانات الميدان", navDaily: "العمل اليومي", navReport: "التقرير النهائي",
-            hChantier: "بيانات الموقع الاستراتيجية", hDaily: "واجهة العمل الميداني واللحام",
+            appLogoName: "لحام تطبيقات SRF", navProject: "موقع بناء", navDaily: "عمل", navReport: "تقرير",
+            hChantier: "بيانات الموقع الاستراتيجية", hDaily: "الإنتاج اليومي",
             lblEntreprise: "اسم الشركة / المقاولة :", lblZone: "منطقة التأثير (Zone) :", lblSro: "خزانة التوزيع (SRO) :",
             lblChantierNotes: "ملاحظات عامة حول المشروع :", btnSaveConfig: "حفظ وتأمين التكوين",
-            lblLine: "الخط LINE :", lblBatiment: "رقم البناية :", lblToro: "تورو T :", lblBrin: "رقم البرا BR :",
-            lblNotes: "الملاحظات الفنية :", btnSaveDaily: "تسجيل خط اللحام والانتقال للتالي", 
+            lblLine: "خط :", lblBatiment: "مبنى :", lblToro: "ت :", lblBrin: "BR :",
+            lblNotes: "الملاحظات :", btnSaveDaily: "حفظ والانتقال إلى التالي", 
             titleReport: "التقرير النهائي الهندسي", repLblEntreprise: "المقاول :", lblRepZone: "المنطقة :", repLblSro: "خزانة SRO :",
             repLblClient: "الزبون :", repClientValue: "اتصالات الجزائر",
-            thBatiment: "البناية", thToro: "تورو", thBrin: "برا", thManchon: "المونشو", thNotes: "الملاحظات", thAction: "إجراء",
+            thLine: "خط", thBatiment: "مبنى", thToro: "ت", thBrin: "BR", thManchon: "المونشو", thNotes: "الملاحظات", thAction: "إجراء",
             btnClear: "مسح وتصفير كافة البيانات", alertFields: "يجب إدخال خانة LINE لحفظ العمل اليومي!",
-            toroNum: "تورو", brinNum: "برا", txtOptionalTitle: "قياسات الأجهزة (OTDR / باور ماتر) - اختيارية",
+            toroNum: "تورو", brinNum: "الخيط", txtOptionalTitle: "قياسات الجهاز (OTDR / الطاقة) - اختياري",
             lblOtdrField: "قياس الـ OTDR (ديسيبل) :", lblPowerField: "قياس الباور ماتر (dBm) :", lblManchon: "علبة الحماية أو المونشو :", btnTxtPdf: "تحميل وحفظ كـ PDF",
             phEntreprise: "مثال: مقاولة خالد للألياف الضوئية", phZone: "مثال: منطقة_FTTH_الجلفة_02", phSro: "مثال: SRO-17-05", phNotesGeog: "مثال: بجانب مقر البلدية...",
-            phLine: "مثال: A", phBatiment: "مثال: 120...", phNotesDaily: "مثال: لحام مستقر جاد...", phOtdr: "مثال: 0.02 dB", phPower: "مثال: -19.2 dBm", phManchon: "مثال: مونشو 04",
-            footerText: "كل الحقوق محفوظة © 2026 | المطور khaledsaadeddine", confirmClear: "هل تريد مسح وتصفير كافة البيانات للبدء في منطقة جديدة؟"
+            phLine: "Ex: A", phBatiment: "Ex: 120...", phNotesDaily: "Ex: Soudure stable...", phOtdr: "مثال: 0.02 dB", phPower: "مثال: -19.2 dBm", phManchon: "مثال: مونشو 04",
+            footerText: "جميع الحقوق محفوظة © 2026 | المطور khaledsaadeddine", confirmClear: "هل تريد مسح وتصفير كافة البيانات للبدء في منطقة جديدة؟"
         },
         en: {
-            navProject: "Project Data", navDaily: "Daily Work", navReport: "Final Report",
+            appLogoName: "SRF APP SOUDUZ", navProject: "Project Data", navDaily: "Daily Work", navReport: "Final Report",
             hChantier: "Project Site Configuration", hDaily: "Daily Production Entry",
             lblEntreprise: "Company Name :", lblZone: "Zone of Influence :", lblSro: "SRO Box :",
             lblChantierNotes: "General Project Notes :", btnSaveConfig: "Save Site Configuration",
@@ -730,7 +669,7 @@
             lblNotes: "Observations :", btnSaveDaily: "Save Entry & Next", 
             titleReport: "Comprehensive Final Report", repLblEntreprise: "Contractor:", lblRepZone: "Zone:", repLblSro: "SRO:",
             repLblClient: "Client:", repClientValue: "Algérie Telecom",
-            thBatiment: "Building", thToro: "T", thBrin: "BR", thManchon: "Sleeve", thNotes: "Observations", thAction: "Action",
+            thLine: "LINE", thBatiment: "Building", thToro: "T", thBrin: "BR", thManchon: "Sleeve", thNotes: "Observations", thAction: "Action",
             btnClear: "Reset All Database", alertFields: "Please fill out the LINE field!",
             toroNum: "Toro", brinNum: "Brin", txtOptionalTitle: "Device Measurements (OTDR / Power Meter) - Optional",
             lblOtdrField: "OTDR Test (Loss dB) :", lblPowerField: "Power Meter (dBm) :", lblManchon: "Manchon / Sleeve Type :", btnTxtPdf: "Download PDF",
@@ -742,45 +681,94 @@
 
     let currentLang = 'fr';
 
-    function enterApp() {
-        playBeep(800, 0.15);
-        document.getElementById('splashScreen').style.opacity = '0';
-        setTimeout(() => {
-            document.getElementById('splashScreen').style.display = 'none';
-            document.getElementById('appMain').style.display = 'block';
-            autoCalculateDailyColors();
-            loadStoredReport();
-        }, 500);
-    }
-
-    function switchTab(tabName) {
-        playBeep(600, 0.05);
-        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-
-        if(tabName === 'project') {
-            document.getElementById('tabProject').classList.add('active');
-            document.getElementById('navProject').classList.add('active');
-        } else if (tabName === 'daily') {
-            document.getElementById('tabDaily').classList.add('active');
-            document.getElementById('navDaily').classList.add('active');
-        } else if (tabName === 'reportTab') {
-            document.getElementById('tabReportTab').classList.add('active');
-            document.getElementById('navReport').classList.add('active');
-        }
-    }
-
-    function toggleOptionalFields() {
+    function changeLanguage() {
         playBeep(500, 0.05);
-        const section = document.getElementById('optionalFieldsSection');
-        const chevron = document.getElementById('optionalChevron');
-        if(section.style.display === 'block') {
-            section.style.display = 'none';
-            chevron.className = "fa-solid fa-chevron-down";
-        } else {
-            section.style.display = 'block';
-            chevron.className = "fa-solid fa-chevron-up";
-        }
+        currentLang = document.getElementById('langSelect').value;
+        const d = dictionary[currentLang] || dictionary['fr'];
+        
+        document.body.style.direction = (currentLang === 'ar') ? 'rtl' : 'ltr';
+
+        document.getElementById('appLogoName').innerText = d.appLogoName;
+        document.getElementById('navTxtProject').innerText = d.navProject;
+        document.getElementById('navTxtDaily').innerText = d.navDaily;
+        document.getElementById('navTxtReport').innerText = d.navReport;
+
+        document.getElementById('hChantier').innerText = d.hChantier;
+        document.getElementById('lblEntreprise').innerText = d.lblEntreprise;
+        document.getElementById('entrepriseInput').placeholder = d.phEntreprise;
+        document.getElementById('lblZone').innerText = d.lblZone;
+        document.getElementById('zoneInput').placeholder = d.phZone;
+        document.getElementById('lblSro').innerText = d.lblSro;
+        document.getElementById('sroInput').placeholder = d.phSro;
+        document.getElementById('lblChantierNotes').innerText = d.lblChantierNotes;
+        document.getElementById('projectNotesInput').placeholder = d.phNotesGeog;
+        document.getElementById('btnSaveConfig').innerText = d.btnSaveConfig;
+
+        document.getElementById('hDaily').innerText = d.hDaily;
+        document.getElementById('lblLine').innerText = d.lblLine;
+        document.getElementById('pboInput').placeholder = d.phLine;
+        document.getElementById('lblToro').innerText = d.lblToro;
+        document.getElementById('lblBatiment').innerText = d.lblBatiment;
+        document.getElementById('batimentInput').placeholder = d.phBatiment;
+        document.getElementById('lblBrin').innerText = d.lblBrin;
+        document.getElementById('lblNotes').innerText = d.lblNotes;
+        document.getElementById('notesInput').placeholder = d.phNotesDaily;
+        document.getElementById('txtOptionalTitle').innerText = d.txtOptionalTitle;
+        document.getElementById('lblOtdrField').innerText = d.lblOtdrField;
+        document.getElementById('otdrInput').placeholder = d.phOtdr;
+        document.getElementById('lblPowerField').innerText = d.lblPowerField;
+        document.getElementById('powerInput').placeholder = d.phPower;
+        document.getElementById('lblManchon').innerText = d.lblManchon;
+        document.getElementById('manchonInput').placeholder = d.phManchon;
+        document.getElementById('btnSaveDaily').innerText = d.btnSaveDaily;
+        
+        document.getElementById('titleReport').innerText = d.titleReport;
+        document.getElementById('repLblEntreprise').innerText = d.repLblEntreprise;
+        document.getElementById('lblRepZone').innerText = d.lblRepZone;
+        document.getElementById('repLblSro').innerText = d.repLblSro;
+        document.getElementById('repLblClient').innerText = d.repLblClient;
+        document.getElementById('repClientValue').innerText = d.repClientValue;
+        document.getElementById('btnTxtPdf').innerText = d.btnTxtPdf;
+
+        document.getElementById('thLine').innerText = d.thLine;
+        document.getElementById('thBatiment').innerText = d.thBatiment;
+        document.getElementById('thToro').innerText = d.thToro;
+        document.getElementById('thBrin').innerText = d.thBrin;
+        document.getElementById('thManchon').innerText = d.thManchon;
+        document.getElementById('thNotes').innerText = d.thNotes;
+        document.getElementById('thAction').innerText = d.thAction;
+        document.getElementById('btnClear').innerText = d.btnClear;
+
+        document.getElementById('appFooter').innerText = d.footerText;
+
+        autoCalculateDailyColors();
+        loadStoredReport();
+    }
+
+    // بقية السكريبتات التنفيذية
+    function autoCalculateDailyColors() {
+        const num = parseInt(document.getElementById('brinInput').value) || 1;
+        const liveColorBox = document.getElementById('liveColorBox');
+        const liveToroTile = document.getElementById('liveToroTile');
+        const liveBrinTile = document.getElementById('liveBrinTile');
+        const d = dictionary[currentLang] || dictionary['fr'];
+
+        const toroIndex = Math.ceil(num / 12);
+        const brinIndex = (num - 1) % 12;
+
+        const toroColor = algerieTelecomColors[currentLang][(toroIndex - 1) % 12];
+        const brinColor = algerieTelecomColors[currentLang][brinIndex];
+
+        document.getElementById('toroInput').value = String(toroIndex);
+        liveColorBox.style.display = 'flex';
+
+        liveToroTile.style.backgroundColor = toroColor.hex;
+        liveToroTile.innerText = `${d.toroNum} ${toroIndex}: ${toroColor.name}`;
+        liveToroTile.style.color = toroColor.darkText ? '#000' : '#fff';
+
+        liveBrinTile.style.backgroundColor = brinColor.hex;
+        liveBrinTile.innerText = `${d.brinNum} ${num}: ${brinColor.name}`;
+        liveBrinTile.style.color = brinColor.darkText ? '#000' : '#fff';
     }
 
     function cleanAndFormatInput(inputElement) {
@@ -810,104 +798,27 @@
         autoCalculateDailyColors();
     }
 
-    // الدالة المسؤولة عن تبديل اللغات الصارم ومسح أي تداخل نصي
-    function changeLanguage() {
-        playBeep(500, 0.05);
-        currentLang = document.getElementById('langSelect').value;
-        const d = dictionary[currentLang] || dictionary['fr'];
-        
-        document.body.style.direction = (currentLang === 'ar') ? 'rtl' : 'ltr';
+    function switchTab(tabName) {
+        playBeep(600, 0.05);
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
 
-        // 1. تبديل نصوص شريط التنقل السفلي والعلوي
-        document.getElementById('navTxtProject').innerText = d.navProject;
-        document.getElementById('navTxtDaily').innerText = d.navDaily;
-        document.getElementById('navTxtReport').innerText = d.navReport;
-
-        // 2. تبديل نصوص التبويب الأول (Chantier) والـ Placeholders
-        document.getElementById('hChantier').innerText = d.hChantier;
-        document.getElementById('lblEntreprise').innerText = d.lblEntreprise;
-        document.getElementById('entrepriseInput').placeholder = d.phEntreprise;
-        document.getElementById('lblZone').innerText = d.lblZone;
-        document.getElementById('zoneInput').placeholder = d.phZone;
-        document.getElementById('lblSro').innerText = d.lblSro;
-        document.getElementById('sroInput').placeholder = d.phSro;
-        document.getElementById('lblChantierNotes').innerText = d.lblChantierNotes;
-        document.getElementById('projectNotesInput').placeholder = d.phNotesGeog;
-        document.getElementById('btnSaveConfig').innerText = d.btnSaveConfig;
-
-        // 3. تبديل نصوص التبويب الثاني (Travail) والـ Placeholders
-        document.getElementById('hDaily').innerText = d.hDaily;
-        document.getElementById('lblLine').innerText = d.lblLine;
-        document.getElementById('pboInput').placeholder = d.phLine;
-        document.getElementById('lblToro').innerText = d.lblToro;
-        document.getElementById('lblBatiment').innerText = d.lblBatiment;
-        document.getElementById('batimentInput').placeholder = d.phBatiment;
-        document.getElementById('lblBrin').innerText = d.lblBrin;
-        document.getElementById('lblNotes').innerText = d.lblNotes;
-        document.getElementById('notesInput').placeholder = d.phNotesDaily;
-        document.getElementById('txtOptionalTitle').innerText = d.txtOptionalTitle;
-        document.getElementById('lblOtdrField').innerText = d.lblOtdrField;
-        document.getElementById('otdrInput').placeholder = d.phOtdr;
-        document.getElementById('lblPowerField').innerText = d.lblPowerField;
-        document.getElementById('powerInput').placeholder = d.phPower;
-        document.getElementById('lblManchon').innerText = d.lblManchon;
-        document.getElementById('manchonInput').placeholder = d.phManchon;
-        document.getElementById('btnSaveDaily').innerText = d.btnSaveDaily;
-        
-        // 4. تبديل نصوص التبويب الثالث (Rapport) والجدول الهيدر
-        document.getElementById('titleReport').innerText = d.titleReport;
-        document.getElementById('repLblEntreprise').innerText = d.repLblEntreprise;
-        document.getElementById('lblRepZone').innerText = d.lblRepZone;
-        document.getElementById('repLblSro').innerText = d.repLblSro;
-        document.getElementById('repLblClient').innerText = d.repLblClient;
-        document.getElementById('repClientValue').innerText = d.repClientValue;
-        document.getElementById('btnTxtPdf').innerText = d.btnTxtPdf;
-
-        document.getElementById('thBatiment').innerText = d.thBatiment;
-        document.getElementById('thToro').innerText = d.thToro;
-        document.getElementById('thBrin').innerText = d.thBrin;
-        document.getElementById('thManchon').innerText = d.thManchon;
-        document.getElementById('thNotes').innerText = d.thNotes;
-        document.getElementById('thAction').innerText = d.thAction;
-        document.getElementById('btnClear').innerText = d.btnClear;
-
-        // 5. تبديل الفوتر وأسفل الصفحة
-        document.getElementById('appFooter').innerText = d.footerText;
-
-        autoCalculateDailyColors();
-        loadStoredReport();
-    }
-
-    function autoCalculateDailyColors() {
-        const num = parseInt(document.getElementById('brinInput').value) || 1;
-        const liveColorBox = document.getElementById('liveColorBox');
-        const liveToroTile = document.getElementById('liveToroTile');
-        const liveBrinTile = document.getElementById('liveBrinTile');
-        const d = dictionary[currentLang] || dictionary['fr'];
-
-        const toroIndex = Math.ceil(num / 12);
-        const brinIndex = (num - 1) % 12;
-
-        const toroColor = algerieTelecomColors[currentLang][(toroIndex - 1) % 12];
-        const brinColor = algerieTelecomColors[currentLang][brinIndex];
-
-        document.getElementById('toroInput').value = String(toroIndex);
-        liveColorBox.style.display = 'flex';
-
-        liveToroTile.style.backgroundColor = toroColor.hex;
-        liveToroTile.innerText = `${d.toroNum} ${toroIndex}: ${toroColor.name}`;
-        liveToroTile.style.color = toroColor.darkText ? '#000' : '#fff';
-
-        liveBrinTile.style.backgroundColor = brinColor.hex;
-        liveBrinTile.innerText = `${d.brinNum} ${num}: ${brinColor.name}`;
-        liveBrinTile.style.color = brinColor.darkText ? '#000' : '#fff';
+        if(tabName === 'project') {
+            document.getElementById('tabProject').classList.add('active');
+            document.getElementById('navProject').classList.add('active');
+        } else if (tabName === 'daily') {
+            document.getElementById('tabDaily').classList.add('active');
+            document.getElementById('navDaily').classList.add('active');
+        } else if (tabName === 'reportTab') {
+            document.getElementById('tabReportTab').classList.add('active');
+            document.getElementById('navReport').classList.add('active');
+        }
     }
 
     function updateHeaderInfo() {
         const ent = document.getElementById('entrepriseInput').value || "-";
         const zone = document.getElementById('zoneInput').value || "-";
         const sro = document.getElementById('sroInput').value || "-";
-        
         document.getElementById('repEntrepriseName').innerText = ent;
         document.getElementById('repZoneName').innerText = zone;
         document.getElementById('repSroName').innerText = sro;
@@ -919,13 +830,11 @@
         const zone = document.getElementById('zoneInput').value || "-";
         const sro = document.getElementById('sroInput').value || "-";
         const pNotes = document.getElementById('projectNotesInput').value || "";
-
         localStorage.setItem('srf_ent', ent);
         localStorage.setItem('srf_zone', zone);
         localStorage.setItem('srf_sro', sro);
         localStorage.setItem('srf_pnotes', pNotes);
-        
-        alert(currentLang === 'ar' ? "تم حفظ بيانات الميدان بنجاح!" : "Configuration du chantier sauvegardée !");
+        alert(currentLang === 'ar' ? "تم حفظ التكوين بنجاح!" : "Configuration sauvegardée !");
         updateHeaderInfo();
     }
 
@@ -935,36 +844,32 @@
         const batiment = document.getElementById('batimentInput').value || "-";
         const toro = document.getElementById('toroInput').value || "1";
         const brin = document.getElementById('brinInput').value || "1";
-        
         const otdr = document.getElementById('otdrInput').value || "-";
         const power = document.getElementById('powerInput').value || "-";
         const manchon = document.getElementById('manchonInput').value || "-";
         const notes = document.getElementById('notesInput').value || "-";
 
         if (pbo === "-") {
-            alert((dictionary[currentLang] || dictionary['fr']).alertFields);
+            alert(dictionary[currentLang].alertFields);
             return;
         }
 
-        let archive = JSON.parse(localStorage.getItem('srf_v3_automated_rows')) || [];
+        let archive = JSON.parse(localStorage.getItem('srf_v4_fixed_rows')) || [];
         archive.push({ pbo, batiment, toro, brin, otdr, power, manchon, notes });
-        localStorage.setItem('srf_v3_automated_rows', JSON.stringify(archive));
+        localStorage.setItem('srf_v4_fixed_rows', JSON.stringify(archive));
 
         let nextBrin = parseInt(brin) + 1;
         if(nextBrin > 144) nextBrin = 1;
-        
         document.getElementById('brinInput').value = String(nextBrin);
         document.getElementById('otdrInput').value = '';
         document.getElementById('powerInput').value = '';
         document.getElementById('notesInput').value = '';
-        
         autoCalculateDailyColors();
         loadStoredReport();
     }
 
     function loadStoredReport() {
-        const rowsContainer = document.getElementById('tableRows');
-        
+        const rowsContainer = document.getElementById('reportTableRows');
         const ent = localStorage.getItem('srf_ent') || "-";
         const zone = localStorage.getItem('srf_zone') || "-";
         const sro = localStorage.getItem('srf_sro') || "-";
@@ -979,9 +884,8 @@
         if(sro !== "-") document.getElementById('sroInput').value = sro;
         if(pnotes !== "") document.getElementById('projectNotesInput').value = pnotes;
 
-        const archive = JSON.parse(localStorage.getItem('srf_v3_automated_rows')) || [];
+        const archive = JSON.parse(localStorage.getItem('srf_v4_fixed_rows')) || [];
         rowsContainer.innerHTML = '';
-
         archive.forEach((item, index) => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
@@ -1001,9 +905,9 @@
 
     function deleteLine(index) {
         playBeep(400, 0.1);
-        let archive = JSON.parse(localStorage.getItem('srf_v3_automated_rows')) || [];
+        let archive = JSON.parse(localStorage.getItem('srf_v4_fixed_rows')) || [];
         archive.splice(index, 1);
-        localStorage.setItem('srf_v3_automated_rows', JSON.stringify(archive));
+        localStorage.setItem('srf_v4_fixed_rows', JSON.stringify(archive));
         loadStoredReport();
     }
 
@@ -1011,7 +915,6 @@
         playBeep(900, 0.15);
         const element = document.getElementById('pdfCaptureArea');
         const zoneName = localStorage.getItem('srf_zone') || 'Zone_FTTH';
-        
         const opt = {
             margin:       10,
             filename:     `Rapport_Soudure_${zoneName}.pdf`,
@@ -1019,7 +922,6 @@
             html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#1a1d24' },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
         };
-
         html2pdf().set(opt).from(element).save();
     }
 
@@ -1039,6 +941,10 @@
             loadStoredReport();
         }
     }
+
+    window.onload = function() {
+        changeLanguage();
+    };
 </script>
 </body>
 </html>
